@@ -1,0 +1,7 @@
+# 虚拟环境与缓存
+.venv/
+__pycache__/
+.pytest_cache/
+
+# HAI 原始数据不入库
+data/raw/

@@ -1,0 +1,5 @@
+# 融合打分参数（claude.md 第 7 节 M9）。目前只包含 QoD 过滤阈值，其余参数待开发 risk.py 时补充。
+
+# 最低检测质量（QoD，0~100）：低于此值的漏洞在融合打分阶段忽略。
+# parse_report 不做 QoD 过滤，vulns.json 保留全部结果及其 qod 字段。
+min_qod: 70

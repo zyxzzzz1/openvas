@@ -1,0 +1,9 @@
+# 扩展部分（M6–M10）依赖；由 .venv 实际安装版本生成
+python-gvm==27.10.0
+lxml==6.1.3
+requests==2.34.2
+jinja2==3.1.6
+pydantic==2.13.5
+PyYAML==6.0.3
+# 测试
+pytest==9.1.1

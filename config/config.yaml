@@ -1,0 +1,13 @@
+# 项目配置。目前只包含扩展部分（M7）的 GVM 连接项，主线参数待主线开发时补充。
+
+gvm:
+  # gvmd socket 在宿主机上的路径（Docker Compose 部署，socket 卷 bind mount 到 /tmp/gvm/gvmd）
+  socket_path: /tmp/gvm/gvmd/gvmd.sock
+  # 实验网段：只允许扫描此网段内的主机（约束 8）
+  lab_subnet: 192.168.56.0/24
+
+vuln:
+  # OpenVAS 导出的 XML 报告（parse_report 的输入）；目前用冒烟扫描样本
+  report_xml: data/samples/smoke_report.xml
+  # 标准化漏洞记录（parse_report 的输出，M7 数据契约）
+  vulns_json: data/processed/vulns.json

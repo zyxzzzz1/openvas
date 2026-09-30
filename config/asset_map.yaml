@@ -1,0 +1,38 @@
+# 子系统 → 资产 → IP 的映射（人为构造，见 claude.md 第 7 节 M6）
+# 注意：资产映射与漏洞数据来自实验环境，仅用于演示，与 HAI 中的攻击没有因果关系。
+# ip / scanned 必须与实验网络现状一致：只有真实存在、位于 gvm.lab_subnet 内的靶机才能标 scanned: true。
+
+subsystems:
+  P1:
+    name: 锅炉过程
+    criticality: 0.9          # 0~1，业务关键度
+    sensor_prefix: "P1_"
+    assets: [plc_p1, hmi_main, ews_01]
+  P2:
+    name: 汽轮机过程
+    criticality: 1.0
+    sensor_prefix: "P2_"
+    assets: [plc_p2, hmi_main, ews_01]
+  P3:
+    name: 水处理过程
+    criticality: 0.7
+    sensor_prefix: "P3_"
+    assets: [plc_p3, hmi_main, ews_02]
+
+assets:
+  ews_01:    {role: 工程师站,   purdue_level: 2, ip: 192.168.56.11, scanned: true}   # Metasploitable2 靶机
+  ews_02:    {role: 工程师站,   purdue_level: 2, ip: null, scanned: false}           # 暂无靶机
+  hmi_main:  {role: HMI,        purdue_level: 2, ip: null, scanned: false}           # 暂无靶机
+  historian: {role: 历史服务器, purdue_level: 3, ip: null, scanned: false}           # 暂无靶机
+  plc_p1:    {role: PLC,        purdue_level: 1, ip: null, scanned: false}           # OT 实践中不主动扫描 PLC
+  plc_p2:    {role: PLC,        purdue_level: 1, ip: null, scanned: false}
+  plc_p3:    {role: PLC,        purdue_level: 1, ip: null, scanned: false}
+
+edges:   # 可达关系：谁能向谁下发指令或写数据
+  - [historian, hmi_main]
+  - [ews_01, plc_p1]
+  - [ews_01, plc_p2]
+  - [ews_02, plc_p3]
+  - [hmi_main, plc_p1]
+  - [hmi_main, plc_p2]
+  - [hmi_main, plc_p3]
