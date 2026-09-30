@@ -11,3 +11,20 @@ vuln:
   report_xml: data/samples/smoke_report.xml
   # 标准化漏洞记录（parse_report 的输出，M7 数据契约）
   vulns_json: data/processed/vulns.json
+  # 威胁情报富化后的漏洞记录（intel 的输出，不覆盖 vulns_json）
+  vulns_enriched_json: data/processed/vulns_enriched.json
+
+intel:
+  # CISA KEV 官方 JSON feed
+  kev_url: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+  kev_cache: data/intel/kev.json
+  kev_max_age_hours: 24
+  # FIRST EPSS API：cve 参数上限 2000 字符（含逗号），limit 默认 100
+  epss_url: https://api.first.org/data/v1/epss
+  epss_cache: data/intel/epss.csv
+  epss_max_param_chars: 2000
+  epss_batch_size: 100
+  # 网络请求：单次超时（秒）、重试次数、指数退避基数（秒）
+  timeout_s: 30
+  retries: 3
+  backoff_s: 2

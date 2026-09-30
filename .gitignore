@@ -5,3 +5,6 @@ __pycache__/
 
 # HAI 原始数据不入库
 data/raw/
+
+# 威胁情报缓存（KEV/EPSS）不入库
+data/intel/
